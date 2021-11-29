@@ -110,21 +110,21 @@ $(function() {
                     <div class="login">
                     <form>
                     <div class="form-group">
-                    <small id="emailHelp" class="form-text text-muted" style="color: #aaa">Username or Email Address</small>
+                    <p id="emailHelp" class="form-text text-muted" style="color: #aaa">Username or Email Address</p>
                       <input type="email" class="form-control" id="uname" aria-describedby="emailHelp" placeholder="Username or Email Address">
                     </div>
                     <div class="form-group">
-                    <small id="emailHelp" class="form-text text-muted" style="color: #aaa">Password</small>
+                    <p id="emailHelp" class="form-text text-muted" style="color: #aaa">Password</p>
                       <input type="password" class="form-control" id="pass" placeholder="Password">
                     </div>
                     <div class="form-check">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <small id="emailHelp" class="form-text text-muted" style="color: #aaa;">Remember Me</small>
-                      <small style="float:right;margin-top:4px;font-size:0.8em;"><a href="idp/resetpassword" class="form-text text-muted">Forgot Password?</a></small>
+                      <p id="emailHelp" class="form-text text-muted" style="color: #aaa;">Remember Me</p>
+                      <p style="float:right;margin-top:4px;font-size:0.8em;"><a href="idp/resetpassword" class="form-text text-muted">Forgot Password?</a></p>
                     </div>
                     <div class="form-check">
                     <button type="button"  id="submit_btn"class="btn btn-primary" style="background-color: #195B94;padding:10px 30px 10px 30px;font-size:10px;margin-top:20px">Log in</button>
-                    <small style="float:right;margin-top:30px;font-size:0.8em;"><a href="idp/usersignup" class="form-text text-muted">Create Your Account</a></small>
+                    <p style="float:right;margin-top:30px;font-size:0.8em;"><a href="idp/usersignup" class="form-text text-muted">Create Your Account</a></p>
                     </div>
                   </form>
                     </div>
@@ -177,7 +177,7 @@ $(function() {
     $(".login").append(resetpassword_page);
     $("h3").remove();
     $("#username").parent().removeClass();
-    var uname = ` <small id="emailHelp" class="form-text text-muted" style="color: #aaa">Username or Email Address</small>`;
+    var uname = ` <p id="emailHelp" class="form-text text-muted" style="color: #aaa">Username or Email Address</p>`;
     $("#username").parent().prepend(uname);
     $(".btn").removeAttr("style");
     $(".btn").parent().removeClass();
@@ -258,7 +258,7 @@ $(function() {
     $("#loginbutton").removeClass();
     $("#loginbutton").removeAttr("style");
     $("#loginbutton").addClass("registration");
-    var sign_in_body = `<small class="sign_in_body" >    </small>`;
+    var sign_in_body = `<    class="sign_in_body" >    </small>`;
     $("#loginbutton").parent().addClass("form-check");
     $("#loginbutton").parent().append(sign_in_body);
     var sign_in = $("a[href='/moas/login'");
