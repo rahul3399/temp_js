@@ -8,7 +8,7 @@ $(function() {
     var signupURL = window.location.origin + "/moas/idp/usersignup";
     var forgotPassURL = window.location.origin + "/moas/idp/resetpassword";
     var googleBtnId = '86';
-    $("link[rel='stylesheet']").remove();
+    $("link[rel='stylesheet'][href*='/moas/css/login-style-ui.css?ver=2.0']").remove();
     $("hr").remove();
     $("#login-header,.login-header").remove();
     $("#loading_image").hide();
@@ -24,11 +24,15 @@ $(function() {
         display:flex;
     }
     .col{
-        flex:1;
+        flex:40%  ;
+    }
+    .col1{
+        flex:50%  ;
     }
     .img-main{
         width: 100%;
         height: 100%;
+        object-fit: cover;
     }
     .login{
         padding: 30px;
@@ -43,7 +47,15 @@ $(function() {
     }
     .logo{
         text-align: center;
+        margin-top:40px;
+        background-position: center;
+        background-size: cover;
+    }
+    .logo1{
+        text-align: center;
         margin-top:150px;
+        background-position: center;
+        background-size: cover;
     }
     li{
         list-style-type: none;
@@ -68,7 +80,8 @@ $(function() {
           color:#aaa;
       }
       .registration{
-        background-color: #744ffb;
+        border-radius:4px;
+        background-color: #195B94;
         color: #fff;
         position: relative;
         overflow: hidden;
@@ -84,6 +97,15 @@ $(function() {
         margin-top:20px;
         font-size: 12px;
       }
+      .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+        width: 100% !important;
+      }
+      .section1{
+          background-image: url('https://enterprisedna.co/learning-portal/wp-content/uploads/2021/11/aapl-blue.jpg');
+          height:100vh;
+          width:100%;
+          background-color:#00101f;
+      }
     
     </style>`;
     $('head').append(fonts);
@@ -97,13 +119,13 @@ $(function() {
     if(action == "login" || action == "/moas/idplogin"){
         var body = `
         <div class="row-main">
-            <div class="col">
-                <div style="height:100vh;width:900px">
-                    <img class="img-main"src=https://enterprisedna.co/learning-portal/wp-content/uploads/2021/11/aapl-blue.jpg">
+            <div class="col1">
+                <div style="" class="section1">
+
                 </div>
             </div>
             <div class="col">
-                <div  class="logo">
+                <div  class="logo1">
                     <img width="45%"  style="text-align:center" src="https://enterprisedna.co/learning-portal/wp-content/uploads/2021/10/LOGO-DARK-455x93.png">
                 </div>
                 <div class="login-main">
@@ -119,12 +141,12 @@ $(function() {
                     </div>
                     <div class="form-check">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <p id="emailHelp" class="form-text text-muted" style="color: #aaa;">Remember Me</p>
-                      <p style="float:right;margin-top:4px;font-size:0.8em;"><a href="idp/resetpassword" class="form-text text-muted">Forgot Password?</a></p>
+                      <small id="emailHelp" class="form-text text-muted" style="color: #aaa;">Remember Me</small>
+                      <small style="float:right;margin-top:4px;font-size:0.8em;"><a href="idp/resetpassword" class="form-text text-muted">Forgot Password?</a></small>
                     </div>
                     <div class="form-check">
                     <button type="button"  id="submit_btn"class="btn btn-primary" style="background-color: #195B94;padding:10px 30px 10px 30px;font-size:10px;margin-top:20px">Log in</button>
-                    <p style="float:right;margin-top:30px;font-size:0.8em;"><a href="idp/usersignup" class="form-text text-muted">Create Your Account</a></p>
+                    <small style="float:right;margin-top:30px;font-size:0.8em;"><a href="idp/usersignup" class="form-text text-muted">Create Your Account</a></small>
                     </div>
                   </form>
                     </div>
@@ -150,13 +172,13 @@ $(function() {
     else if(action == "resetuserpassword" || actionf == "updateuserpassword"){
         var body = `
         <div class="row-main">
-            <div class="col">
-                <div style="height:100vh;width:900px">
-                    <img class="img-main"src=https://enterprisedna.co/learning-portal/wp-content/uploads/2021/11/aapl-blue.jpg">
+            <div class="col1">
+                <div style="" class="section1">
+
                 </div>
             </div>
             <div class="col">
-                <div  class="logo">
+                <div  class="logo" style="margin-top:200px">
                     <img width="45%"  style="text-align:center" src="https://enterprisedna.co/learning-portal/wp-content/uploads/2021/10/LOGO-DARK-455x93.png">
                 </div>
                 <div class="login-main">
@@ -177,7 +199,7 @@ $(function() {
     $(".login").append(resetpassword_page);
     $("h3").remove();
     $("#username").parent().removeClass();
-    var uname = ` <p id="emailHelp" class="form-text text-muted" style="color: #aaa">Username or Email Address</p>`;
+    var uname = ` <p id="emailHelp" class="form-text text-muted" style="color: #aaa">Email Address</p>`;
     $("#username").parent().prepend(uname);
     $(".btn").removeAttr("style");
     $(".btn").parent().removeClass();
@@ -192,7 +214,7 @@ $(function() {
         "background-color":"#195B94"
     })
     $("#go-back-link").css({
-        "font-size":"10px",
+        "font-size":"14px",
         "width":"100% !important",
         
     })
@@ -221,9 +243,9 @@ $(function() {
     if(action == "/moas/newusersignup"){
         var body = `
         <div class="row-main">
-            <div class="col">
-                <div style="height:100vh;width:900px">
-                    <img class="img-main"src=https://enterprisedna.co/learning-portal/wp-content/uploads/2021/11/aapl-blue.jpg">
+            <div class="col1">
+                <div style="" class="section1">
+
                 </div>
             </div>
             <div class="col">
@@ -258,7 +280,7 @@ $(function() {
     $("#loginbutton").removeClass();
     $("#loginbutton").removeAttr("style");
     $("#loginbutton").addClass("registration");
-    var sign_in_body = `<    class="sign_in_body" >    </small>`;
+    var sign_in_body = `<small class="sign_in_body" >    </small>`;
     $("#loginbutton").parent().addClass("form-check");
     $("#loginbutton").parent().append(sign_in_body);
     var sign_in = $("a[href='/moas/login'");
@@ -270,10 +292,20 @@ $(function() {
     })
     $("a[href='/moas/login'").parent().hide();
     $(".sign_in_body").append(sign_in);
+    // $("#groupsDiv").hide();
+    $("#groupsDiv").removeClass();
+    $("#group_multi_select").prop("title","Choose Program");
+    $("#group_multi_select").removeAttr("data-actions-box");
+    $($("#groupsDiv").children()[0]).text("Program");
+    $("#customAttribute1").parent().removeClass();
+    $("#customAttribute2").parent().removeClass();
+    $("#customAttribute1").prop("placeholder","Company Name");
+    $("#customAttribute2").prop("placeholder","Center of Excellence and Membership");
+    
 
 
 
     }
-    
+  
 
 });
