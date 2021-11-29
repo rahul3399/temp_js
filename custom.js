@@ -25,6 +25,7 @@ $(function() {
     }
     .col{
         flex:40%  ;
+        margin:auto;
     }
     .col1{
         flex:50%  ;
@@ -42,18 +43,18 @@ $(function() {
     }
     .login-main{
         padding: 25px;
-        width: 370px;
+        width: 400px;
         margin:auto;
     }
     .logo{
         text-align: center;
-        margin-top:40px;
+
         background-position: center;
         background-size: cover;
     }
     .logo1{
         text-align: center;
-        margin-top:150px;
+     
         background-position: center;
         background-size: cover;
     }
@@ -76,7 +77,7 @@ $(function() {
         font-size:13px;
       }
       .text-left{
-          font-size:12px;
+          font-size:14px;
           color:#aaa;
       }
       .registration{
@@ -95,7 +96,7 @@ $(function() {
         padding: 12px;
         width: 130px;
         margin-top:20px;
-        font-size: 12px;
+        font-size: 14px;
       }
       .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
         width: 100% !important;
@@ -108,7 +109,28 @@ $(function() {
         background-position-x: right;
         background-size: cover;
       }
-    
+      .form-control{
+          height:4.0rem !important;
+      }
+      .input-custom {
+        height:4.0rem !important;
+    }
+      .inline{
+          display:inline-block;
+      }
+      .create_act{
+        float:right;
+        margin-top:30px;
+        margin-left:80px
+      }
+      .text-left{
+          font-size:14px;
+      }
+      .btn-primary{
+          height:44px;
+          font-size:14px;
+      }
+  
     </style>`;
     $('head').append(fonts);
     $('head').append(links);
@@ -144,11 +166,15 @@ $(function() {
                     <div class="form-check">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
                       <small id="emailHelp" class="form-text text-muted" style="color: #aaa;">Remember Me</small>
-                      <small style="float:right;margin-top:4px;font-size:0.8em;"><a href="idp/resetpassword" class="form-text text-muted">Forgot Password?</a></small>
-                    </div>
-                    <div class="form-check">
-                    <button type="button"  id="submit_btn"class="btn btn-primary" style="background-color: #195B94;padding:10px 30px 10px 30px;font-size:10px;margin-top:20px">Log in</button>
-                    <small style="float:right;margin-top:30px;font-size:0.8em;"><a href="idp/usersignup" class="form-text text-muted">Create Your Account</a></small>
+                      <small style="float:right;margin-top:4px;font-size:1.3rem;"><a href="idp/resetpassword" class="form-text text-muted">Forgot Password?</a></small>
+                    </div>   
+                    <div class="inline">
+                        <div class="inline">
+                        <button type="button"  id="submit_btn"class="btn btn-primary" style="background-color: #195B94;padding:10px 40px 15px 40px;font-size:14px;margin-top:20px">Log in</button>
+                        </div>
+                        <div class="inline create_act" style="">
+                        <small style="float:right;font-size:1.3rem;"><a href="idp/usersignup" class="form-text text-muted">Register Now</a></small>
+                        </div>
                     </div>
                   </form>
                     </div>
@@ -180,7 +206,7 @@ $(function() {
                 </div>
             </div>
             <div class="col">
-                <div  class="logo" style="margin-top:200px">
+                <div  class="logo" style="">
                     <img width="45%"  style="text-align:center" src="https://enterprisedna.co/learning-portal/wp-content/uploads/2021/10/LOGO-DARK-455x93.png">
                 </div>
                 <div class="login-main">
@@ -211,8 +237,8 @@ $(function() {
         
     });
     $(".btn-primary").css({
-        "font-size": "10px",
-        "padding":"10px 30px 10px 30px",
+        "font-size": "14px",
+        "padding":"15px 40px 15px 40px;",
         "background-color":"#195B94"
     })
     $("#go-back-link").css({
@@ -289,7 +315,7 @@ $(function() {
     $(sign_in).css({
         "margin-top":"23px",
         "float": "right",
-        "font-size": "12px",
+        "font-size": "14px",
         "color":"black"
     })
     $("a[href='/moas/login'").parent().hide();
@@ -298,12 +324,20 @@ $(function() {
     $("#groupsDiv").removeClass();
     $("#group_multi_select").prop("title","Choose Program");
     $("#group_multi_select").removeAttr("data-actions-box");
+    $("#group_multi_select").css({
+        "height":"4.3rem !important"
+    });
     $($("#groupsDiv").children()[0]).text("Program");
     $("#customAttribute1").parent().removeClass();
     $("#customAttribute2").parent().removeClass();
     $("#customAttribute1").prop("placeholder","Company Name");
     $("#customAttribute2").prop("placeholder","Center of Excellence and Membership");
-    
+    $("#email").removeClass("input-custom");
+    $("#username").removeClass("input-custom");
+    $("input[name*='confirmPassword']").removeClass("input-custom");
+    $("input[name*='idpUserLogin.cleartextPassword']").removeClass("input-custom");
+    $("#email").removeClass("input-custom");
+
 
 
 
