@@ -101,10 +101,12 @@ $(function() {
         width: 100% !important;
       }
       .section1{
-          background-image: url('https://enterprisedna.co/learning-portal/wp-content/uploads/2021/11/aapl-blue.jpg');
-          height:100vh;
-          width:100%;
-          background-color:#00101f;
+        background-image: url(https://enterprisedna.co/learning-portal/wp-content/uploads/2021/11/aapl-blue.jpg);
+        height: 100vh;
+        width: 100%;
+        background-color: #00101f;
+        background-attachment: fixed;
+        background-size: cover;
       }
     
     </style>`;
