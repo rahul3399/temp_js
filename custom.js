@@ -105,7 +105,7 @@ $(function() {
         height: 100vh;
         width: 100%;
         background-color: #00101f;
-        background-attachment: fixed;
+        background-position-x: right;
         background-size: cover;
       }
     
