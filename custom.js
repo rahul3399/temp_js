@@ -293,7 +293,7 @@ $(function() {
     $("body").prepend(body);
     $(footer).insertAfter("#login-body");
     var alert  = $(".alert");
-    $(".login").prepend(alert);
+    $(".login-main").prepend(alert);
     var signup_page  =$("#inline-registration");
     $(".login").prepend(signup_page);
     $("#username").parent().removeClass();
