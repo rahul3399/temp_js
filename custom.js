@@ -173,7 +173,7 @@ $(function() {
                         <button type="button"  id="submit_btn"class="btn btn-primary" style="background-color: #195B94;padding:10px 40px 15px 40px;font-size:14px;margin-top:20px">Log in</button>
                         </div>
                         <div class="inline create_act" style="">
-                        <small style="float:right;font-size:1.3rem;"><a href="idp/usersignup" class="form-text text-muted">Create Account</a></small>
+
                         </div>
                     </div>
                   </form>
