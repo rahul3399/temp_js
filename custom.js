@@ -20,26 +20,41 @@ $(function() {
     `;
     let customCss = `
     <style>
-    .row-main{
+    /*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.3.6,
+* Autoprefixer: v10.3.1
+* Browsers: last 4 version
+*/
+
+.row-main{
+        display:-webkit-box;
+        display:-ms-flexbox;
         display:flex;
     }
     .col{
-        flex:40%  ;
+        -webkit-box-flex:40%  ;
+            -ms-flex:40%  ;
+                flex:40%  ;
         margin:auto;
     }
     .col1{
-        flex:50%  ;
+        -webkit-box-flex:50%  ;
+            -ms-flex:50%  ;
+                flex:50%  ;
     }
     .img-main{
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        -o-object-fit: cover;
+           object-fit: cover;
     }
     .login{
-        padding: 30px;
+        padding: 40px;
         background-color: #fff;
         border-radius: 0px;
-        box-shadow: 0 0 37.5px 14px rgb(2 8 53 / 6%);
+        -webkit-box-shadow: 0 0 37.5px 14px #e8e8e8;
+                box-shadow: 0 0 37.5px 14px #e8e8e8;;
     }
     .login-main{
         padding: 25px;
@@ -140,7 +155,7 @@ $(function() {
     var action = $(".form").attr("action");
     var actionf = $(".form-inline").attr("action");
     console.log(action);
-    if(action == "login" || action == "/moas/idplogin"){
+    if(action == "login" || action == "/moas/idplogin" || action == '/moas/idp/userlogin'){
         var body = `
         <div class="row-main">
             <div class="col1">
@@ -154,29 +169,12 @@ $(function() {
                 </div>
                 <div class="login-main">
                     <div class="login">
-                    <form>
-                    <div class="form-group">
-                    <p id="emailHelp" class="form-text text-muted" style="color: #aaa">Username or Email Address</p>
-                      <input type="email" class="form-control" id="uname" aria-describedby="emailHelp" placeholder="Username or Email Address">
-                    </div>
-                    <div class="form-group">
-                    <p id="emailHelp" class="form-text text-muted" style="color: #aaa">Password</p>
-                      <input type="password" class="form-control" id="pass" placeholder="Password">
-                    </div>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <small id="emailHelp" class="form-text text-muted" style="color: #aaa;">Remember Me</small>
-                      <small style="float:right;margin-top:4px;font-size:1.3rem;"><a href="idp/resetpassword" class="form-text text-muted">Forgot Password?</a></small>
-                    </div>   
-                    <div class="inline">
-                        <div class="inline">
-                        <button type="button"  id="submit_btn"class="btn btn-primary" style="background-color: #195B94;padding:10px 40px 15px 40px;font-size:14px;margin-top:20px">Log in</button>
-                        </div>
-                        <div class="inline create_act" style="">
 
-                        </div>
-                    </div>
-                  </form>
+                    <div class="form-check" style="margin-top:20px">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <small id="emailHelp" class="form-text text-muted" style="color: #aaa;">Remember Me</small>
+                    <small style="float:right;margin-top:4px;font-size:1.3rem;"><a href="idp/resetpassword" class="form-text text-muted">Forgot Password?</a></small>
+                  </div>
                     </div>
                 </div>
             </div>
@@ -189,13 +187,39 @@ $(function() {
     $(footer).insertAfter("#login-body");
     
     var alert  = $(".alert");
-    $(".login").prepend(alert);
+
     $("#submit_btn").click(function(){
         $("#username").val($("#uname").val());
         $("#plaintextPassword").val($("#pass").val());
         $(".form").submit();
-    })
+    });
+    var login = $(".login-form");
+    $(".login").prepend(login);
      $("#login-wrapper").hide();
+     var unamelbl = `<p id="emailHelp" class="form-text text-muted" style="color: #aaa">Username or Email Address</p>`;
+     $("#userName").removeClass();
+     $("#userName").prepend(unamelbl);
+     $(".custom-small-text").remove();
+     $("#loginbutton").removeClass();
+     $("#loginbutton").removeAttr("style");
+     $("#loginbutton").addClass("btn btn-primary");
+     $("#loginbutton").css({
+        "background-color": "#195B94",
+        "padding":"10px 40px 15px 40px",
+        "font-size":"14px",
+        "margin-top":"20px"
+     });
+     $("#loginbutton").parent().removeClass();
+     var passlbl = `<p id="emailHelp" class="form-text text-muted" style="color: #aaa">Password</p>`;
+     var duname = `<b><p id="emailHelp" class="form-text" style="text-align:center;margin-bottom:10px">`+$("#username").val()+`</p></b>`;
+
+     $("#passwordspan").removeClass();
+     $("#passwordspan").prepend(passlbl);
+     $("#passwordspan").prepend(duname);
+     var inline = $(".form-check");
+     $("#loginbutton").parent().parent().prepend(inline);
+     $(".login-main").prepend(alert);
+
     }
     else if(action == "resetuserpassword" || actionf == "updateuserpassword"){
         var body = `
@@ -222,7 +246,7 @@ $(function() {
     $("body").prepend(body);
     $(footer).insertAfter("#login-body");
     var alert  = $(".alert");
-    $(".login").prepend(alert);
+    $(".login-main").prepend(alert);
     var resetpassword_page = $("#login-wrapper");
     $(".login").append(resetpassword_page);
     $("h3").remove();
@@ -301,8 +325,6 @@ $(function() {
     $("#email").parent().css({
         "margin-top":"10px"
     })
-    $("input[name*='idpUserLogin.cleartextPassword'").parent().removeClass();
-    $("input[name*='confirmPassword'").parent().removeClass();
     $("#loginbutton").parent().removeClass();
     $("#loginbutton").val("Register")
     $("#loginbutton").removeClass();
@@ -334,11 +356,19 @@ $(function() {
     $("#customAttribute2").prop("placeholder","Center of Excellence and Membership");
     $("#email").removeClass("input-custom");
     $("#username").removeClass("input-custom");
-    $("input[name*='confirmPassword']").removeClass("input-custom");
-    $("input[name*='idpUserLogin.cleartextPassword']").removeClass("input-custom");
     $("#email").removeClass("input-custom");
     $("#group_multi_select").attr("required","true")
-
+    $("#row2Div").removeClass();
+    $("#firstnameDiv").removeClass();
+    $("#lastnameDiv").removeClass();
+    $("#firstnameDiv").addClass("col-md-6");
+    $("#lastnameDiv").addClass("col-md-6");
+    $("#endUser_fname").prop("placeholder","Firstname");
+    $("#endUser_lname").prop("placeholder","Lastname");
+    $("#passwordDiv").removeClass();    
+    $("#confirmpasswordDiv").removeClass();    
+    $("#groupsDiv").removeClass();
+    $("#customAttribute1").parent().removeClass();
 
 
     }
