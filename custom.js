@@ -333,15 +333,6 @@ $(function() {
     var sign_in_body = `<small class="sign_in_body" >    </small>`;
     $("#loginbutton").parent().addClass("form-check");
     $("#loginbutton").parent().append(sign_in_body);
-    var sign_in = $("a[href='/moas/login'");
-    $(sign_in).css({
-        "margin-top":"23px",
-        "float": "right",
-        "font-size": "14px",
-        "color":"black"
-    })
-    $("a[href='/moas/login'").parent().hide();
-    $(".sign_in_body").append(sign_in);
     // $("#groupsDiv").hide();
     $("#groupsDiv").removeClass();
     $("#group_multi_select").prop("title","Choose Program");
