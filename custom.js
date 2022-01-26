@@ -14,6 +14,14 @@ $(function() {
     $("#loading_image").hide();
     $(".custom-title").remove();
     $("br").remove();
+    $("#group_multi_select").prop("title", "Choose Program");
+    $("#group_multi_select").removeAttr("data-actions-box", "false");
+    $("#group_multi_select").removeAttr("data-live-search", "false");
+    $("#group_multi_select").removeAttr("data-live-search-placeholder", "false");
+    $("#group_multi_select").removeAttr("multiple");
+    $("#group_multi_select").css({
+        "height": "4.3rem !important"
+    });
     let fonts = ``;
     let links = `
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -358,12 +366,7 @@ $(function() {
         $("#loginbutton").parent().append(sign_in_body);
         // $("#groupsDiv").hide();
         $("#groupsDiv").removeClass();
-        $("#group_multi_select").prop("title", "Choose Program");
-        $("#group_multi_select").attr("data-actions-box", "false");
-        $("#group_multi_select").removeAttr("multiple");
-        $("#group_multi_select").css({
-            "height": "4.3rem !important"
-        });
+
         $($("#groupsDiv").children()[0]).text("Program");
         $("#customAttribute1").parent().removeClass();
         $("#customAttribute2").parent().removeClass();
