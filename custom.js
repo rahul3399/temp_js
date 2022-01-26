@@ -150,12 +150,18 @@ $(function() {
     $('head').append(fonts);
     $('head').append(links);
     $('head').append(customCss);
-    
+
     var nav = ``;
     var action = $(".form").attr("action");
     var actionf = $(".form-inline").attr("action");
     console.log(action);
-    if(action == "login" || action == "/moas/idplogin" || action == '/moas/idp/userlogin'){
+    console.log(actionf);
+    if (action == "login" || action == '/moas/idp/userlogin') {
+        $('div').hide();
+        window.location.href = 'https://enterprisedna.co/learning-portal?option=saml_user_login';
+        // window.location.href = 'https://twolips.miniorange.in/moas/idp/usersignup';
+    }
+    if (action == "/moas/idplogin") {
         var body = `
         <div class="row-main">
             <div class="col1">
@@ -180,48 +186,47 @@ $(function() {
             </div>
         </div>
     `;
-    var footer = ``;
-    $(nav).insertBefore("#loading_image");
-    $("body").prepend(body);
-   
-    $(footer).insertAfter("#login-body");
-    
-    var alert  = $(".alert");
+        var footer = ``;
+        $(nav).insertBefore("#loading_image");
+        $("body").prepend(body);
 
-    $("#submit_btn").click(function(){
-        $("#username").val($("#uname").val());
-        $("#plaintextPassword").val($("#pass").val());
-        $(".form").submit();
-    });
-    var login = $(".login-form");
-    $(".login").prepend(login);
-     $("#login-wrapper").hide();
-     var unamelbl = `<p id="emailHelp" class="form-text text-muted" style="color: #aaa">Username or Email Address</p>`;
-     $("#userName").removeClass();
-     $("#userName").prepend(unamelbl);
-     $(".custom-small-text").remove();
-     $("#loginbutton").removeClass();
-     $("#loginbutton").removeAttr("style");
-     $("#loginbutton").addClass("btn btn-primary");
-     $("#loginbutton").css({
-        "background-color": "#195B94",
-        "padding":"10px 40px 15px 40px",
-        "font-size":"14px",
-        "margin-top":"20px"
-     });
-     $("#loginbutton").parent().removeClass();
-     var passlbl = `<p id="emailHelp" class="form-text text-muted" style="color: #aaa">Password</p>`;
-     var duname = `<b><p id="emailHelp" class="form-text" style="text-align:center;margin-bottom:10px">`+$("#username").val()+`</p></b>`;
+        $(footer).insertAfter("#login-body");
 
-     $("#passwordspan").removeClass();
-     $("#passwordspan").prepend(passlbl);
-     $("#passwordspan").prepend(duname);
-     var inline = $(".form-check");
-     $("#loginbutton").parent().parent().prepend(inline);
-     $(".login-main").prepend(alert);
+        var alert = $(".alert");
 
-    }
-    else if(action == "resetuserpassword" || actionf == "updateuserpassword"){
+        $("#submit_btn").click(function() {
+            $("#username").val($("#uname").val());
+            $("#plaintextPassword").val($("#pass").val());
+            $(".form").submit();
+        });
+        var login = $(".login-form");
+        $(".login").prepend(login);
+        $("#login-wrapper").hide();
+        var unamelbl = `<p id="emailHelp" class="form-text text-muted" style="color: #aaa">Email Address</p>`;
+        $("#userName").removeClass();
+        $("#userName").prepend(unamelbl);
+        $(".custom-small-text").remove();
+        $("#loginbutton").removeClass();
+        $("#loginbutton").removeAttr("style");
+        $("#loginbutton").addClass("btn btn-primary");
+        $("#loginbutton").css({
+            "background-color": "#195B94",
+            "padding": "10px 40px 15px 40px",
+            "font-size": "14px",
+            "margin-top": "20px"
+        });
+        $("#loginbutton").parent().removeClass();
+        var passlbl = `<p id="emailHelp" class="form-text text-muted" style="color: #aaa">Password</p>`;
+        var duname = `<b><p id="emailHelp" class="form-text" style="text-align:center;margin-bottom:10px">` + $("#username").val() + `</p></b>`;
+
+        $("#passwordspan").removeClass();
+        $("#passwordspan").prepend(passlbl);
+        $("#passwordspan").prepend(duname);
+        var inline = $(".form-check");
+        $("#loginbutton").parent().parent().prepend(inline);
+        $(".login-main").prepend(alert);
+    } else if (action == "resetuserpassword" || actionf == "updateuserpassword") {
+        console.log("hh");
         var body = `
         <div class="row-main">
             <div class="col1">
@@ -241,58 +246,76 @@ $(function() {
             </div>
         </div>
     `;
-    var footer = ``;
-    $(nav).insertBefore("#loading_image");
-    $("body").prepend(body);
-    $(footer).insertAfter("#login-body");
-    var alert  = $(".alert");
-    $(".login-main").prepend(alert);
-    var resetpassword_page = $("#login-wrapper");
-    $(".login").append(resetpassword_page);
-    $("h3").remove();
-    $("#username").parent().removeClass();
-    var uname = ` <p id="emailHelp" class="form-text text-muted" style="color: #aaa">Email Address</p>`;
-    $("#username").parent().prepend(uname);
-    $(".btn").removeAttr("style");
-    $(".btn").parent().removeClass();
-    $(".btn").parent().css({
-        "width": "150px",
-        "margin-top": "20px",
-        
-    });
-    $(".btn-primary").css({
-        "font-size": "14px",
-        "padding":"15px 40px 15px 40px;",
-        "background-color":"#195B94"
-    })
-    $("#go-back-link").css({
-        "font-size":"14px",
-        "width":"100% !important",
-        
-    })
-    $("#go-back-link").parent().removeAttr("style");
-    $("#go-back-link").parent().css({
-        
-        "font-size":"10px",
-        "width":"100% !important",
-        "text-align":"center",
-        "margin-top":"30px"
-    });
-    $(".login").css({
-        "padding":"40px 40px 10px 40px"
-    })
-    var br = `<br>`;
-    $("#password").parent().removeClass();
-    $("input[name*=confirmPassword").parent().removeClass();
-    $(".center").css({
-        "padding-left":"20px",
-        
-    });
-    $("#submit").parent().css({
-        "padding-left":"20px"
-    });
+        var footer = ``;
+        $(nav).insertBefore("#loading_image");
+        $("body").prepend(body);
+        $(footer).insertAfter("#login-body");
+        var alert = $(".alert");
+        $(".login-main").prepend(alert);
+        var resetpassword_page = $("#login-wrapper");
+        $(".login").append(resetpassword_page);
+        $("h3").remove();
+        $("#username").parent().removeClass();
+        var uname = ` <p id="emailHelp" class="form-text text-muted" style="color: #aaa">Email Address</p>`;
+        $("#username").parent().prepend(uname);
+        $(".btn").removeAttr("style");
+        $(".btn").parent().removeClass();
+        $(".btn").parent().css({
+            "width": "150px",
+            "margin-top": "20px",
+
+        });
+        $(".btn-primary").css({
+            "font-size": "14px",
+            "padding": "15px 40px 15px 40px;",
+            "background-color": "#195B94"
+        })
+        $("#go-back-link").css({
+            "font-size": "14px",
+            "width": "100% !important",
+
+        })
+        $("#go-back-link").parent().removeAttr("style");
+        $("#go-back-link").parent().css({
+
+            "font-size": "10px",
+            "width": "100% !important",
+            "text-align": "center",
+            "margin-top": "30px"
+        });
+        $(".login").css({
+            "padding": "40px 40px 10px 40px"
+        })
+        var br = `<br>`;
+
+        $(".col-xs-5").removeClass();
+        $(".center").css({
+            "padding-left": "20px",
+
+        });
+        $("#submit").parent().css({
+            "padding-left": "20px"
+        });
+        $("#go-back-link").attr('href', '../idplogin');
+
+        $(".row").removeClass("center");
+        $("#password").css({
+            "padding-right": "80px"
+        })
+        $(".form-control").css({
+            "padding-right": "80px"
+        })
+
     }
-    if(action == "/moas/newusersignup"){
+    if (window.location.href.indexOf("updateuserpassword") > -1 && actionf != 'updateuserpassword') {
+        window.location.href = 'https://enterprisedna.co/learning-portal?option=saml_user_login';
+    }
+    var successpage = $("form").attr("id");
+    console.log(successpage);
+    if (successpage == 'postcreatelogin') {
+        window.location.href = 'https://enterprisedna.co/learning-portal?option=saml_user_login';
+    }
+    if (action == "/moas/newusersignup") {
         var body = `
         <div class="row-main">
             <div class="col1">
@@ -312,57 +335,57 @@ $(function() {
             </div>
         </div>
     `;
-    var footer = ``;
-    $(nav).insertBefore("#loading_image");
-    $("body").prepend(body);
-    $(footer).insertAfter("#login-body");
-    var alert  = $(".alert");
-    $(".login-main").prepend(alert);
-    var signup_page  =$("#inline-registration");
-    $(".login").prepend(signup_page);
-    $("#username").parent().removeClass();
-    $("#email").parent().removeClass();
-    $("#email").parent().css({
-        "margin-top":"10px"
-    })
-    $("#loginbutton").parent().removeClass();
-    $("#loginbutton").val("Register")
-    $("#loginbutton").removeClass();
-    $("#loginbutton").removeAttr("style");
-    $("#loginbutton").addClass("registration");
-    var sign_in_body = `<small class="sign_in_body" >    </small>`;
-    $("#loginbutton").parent().addClass("form-check");
-    $("#loginbutton").parent().append(sign_in_body);
-    // $("#groupsDiv").hide();
-    $("#groupsDiv").removeClass();
-    $("#group_multi_select").prop("title","Choose Program");
-    $("#group_multi_select").removeAttr("data-actions-box");
-    $("#group_multi_select").css({
-        "height":"4.3rem !important"
-    });
-    $($("#groupsDiv").children()[0]).text("Program");
-    $("#customAttribute1").parent().removeClass();
-    $("#customAttribute2").parent().removeClass();
-    $("#customAttribute1").prop("placeholder","Company Name");
-    $("#customAttribute2").prop("placeholder","Center of Excellence and Membership");
-    $("#email").removeClass("input-custom");
-    $("#username").removeClass("input-custom");
-    $("#email").removeClass("input-custom");
-    $("#group_multi_select").attr("required","true")
-    $("#row2Div").removeClass();
-    $("#firstnameDiv").removeClass();
-    $("#lastnameDiv").removeClass();
-    $("#firstnameDiv").addClass("col-md-6");
-    $("#lastnameDiv").addClass("col-md-6");
-    $("#endUser_fname").prop("placeholder","Firstname");
-    $("#endUser_lname").prop("placeholder","Lastname");
-    $("#passwordDiv").removeClass();    
-    $("#confirmpasswordDiv").removeClass();    
-    $("#groupsDiv").removeClass();
-    $("#customAttribute1").parent().removeClass();
-
-
+        var footer = ``;
+        $(nav).insertBefore("#loading_image");
+        $("body").prepend(body);
+        $(footer).insertAfter("#login-body");
+        var alert = $(".alert");
+        $(".login-main").prepend(alert);
+        var signup_page = $("#inline-registration");
+        $(".login").prepend(signup_page);
+        $("#username").parent().removeClass();
+        $("#email").parent().removeClass();
+        $("#email").parent().css({
+            "margin-top": "10px"
+        })
+        $("#loginbutton").parent().removeClass();
+        $("#loginbutton").val("Register")
+        $("#loginbutton").removeClass();
+        $("#loginbutton").removeAttr("style");
+        $("#loginbutton").addClass("registration");
+        var sign_in_body = `<small class="sign_in_body" >  </small>`;
+        $("#loginbutton").parent().addClass("form-check");
+        $("#loginbutton").parent().append(sign_in_body);
+        // $("#groupsDiv").hide();
+        $("#groupsDiv").removeClass();
+        $("#group_multi_select").prop("title", "Choose Program");
+        $("#group_multi_select").removeAttr("data-actions-box");
+        $("#group_multi_select").removeAttr("multiple");
+        $("#group_multi_select").css({
+            "height": "4.3rem !important"
+        });
+        $($("#groupsDiv").children()[0]).text("Program");
+        $("#customAttribute1").parent().removeClass();
+        $("#customAttribute2").parent().removeClass();
+        $("#customAttribute1").prop("placeholder", "Company Name");
+        $("#customAttribute2").prop("placeholder", "Center of Excellence and Membership");
+        $("#email").removeClass("input-custom");
+        $("#username").removeClass("input-custom");
+        $("#email").removeClass("input-custom");
+        $("#group_multi_select").attr("required", "true")
+        $("#row2Div").removeClass();
+        $("#firstnameDiv").removeClass();
+        $("#lastnameDiv").removeClass();
+        $("#firstnameDiv").addClass("col-md-6");
+        $("#lastnameDiv").addClass("col-md-6");
+        $("#endUser_fname").prop("placeholder", "Firstname");
+        $("#endUser_lname").prop("placeholder", "Lastname");
+        $("#passwordDiv").removeClass();
+        $("#confirmpasswordDiv").removeClass();
+        $("#groupsDiv").removeClass();
+        $("#customAttribute1").parent().removeClass();
+        $(".custom-small-text").children().children().attr('href', '');
+        $(".custom-small-text").children().hide();
+        $(".custom-small-text").append(`<p>Already have an account?<a href='https://enterprisedna.co/learning-portal/?option=saml_user_login'> Click here</a></p>`);
     }
-  
-
 });
