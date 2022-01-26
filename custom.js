@@ -359,7 +359,7 @@ $(function() {
         // $("#groupsDiv").hide();
         $("#groupsDiv").removeClass();
         $("#group_multi_select").prop("title", "Choose Program");
-        $("#group_multi_select").removeAttr("data-actions-box");
+        $("#group_multi_select").attr("data-actions-box", "false");
         $("#group_multi_select").removeAttr("multiple");
         $("#group_multi_select").css({
             "height": "4.3rem !important"
