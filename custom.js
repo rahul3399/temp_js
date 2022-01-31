@@ -5,8 +5,7 @@ $(function() {
     }
 
     console.log("Script added");
-    $(".btn-group-sm").hide();
-    $(".glyphicon.glyphicon-ok").remove();
+
     var signupURL = window.location.origin + "/moas/idp/usersignup";
     var forgotPassURL = window.location.origin + "/moas/idp/resetpassword";
     var googleBtnId = '86';
@@ -327,6 +326,8 @@ $(function() {
         window.location.href = 'https://enterprisedna.co/learning-portal?option=saml_user_login';
     }
     if (action == "/moas/newusersignup") {
+        $(".btn-group-sm").hide();
+        $(".glyphicon.glyphicon-ok").remove();
         var body = `
         <div class="row-main">
             <div class="col1">
