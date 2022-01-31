@@ -326,8 +326,8 @@ $(function() {
         window.location.href = 'https://enterprisedna.co/learning-portal?option=saml_user_login';
     }
     if (action == "/moas/newusersignup") {
-        $(".btn-group-sm").hide();
-        $(".glyphicon.glyphicon-ok").remove();
+        // $(".btn-group-sm").hide();
+        // $(".glyphicon.glyphicon-ok").remove();
         var body = `
         <div class="row-main">
             <div class="col1">
