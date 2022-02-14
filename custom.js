@@ -10,19 +10,18 @@ $(function() {
     var forgotPassURL = window.location.origin + "/moas/idp/resetpassword";
     var googleBtnId = '86';
     $("link[rel='stylesheet'][href*='/moas/css/login-style-ui.css?ver=2.0']").remove();
-    $("link[rel='stylesheet'][href*='bootstrap-select.min.css']").remove();
+    // $("link[rel='stylesheet'][href*='bootstrap-select.min.css']").remove();
     $("hr").remove();
     $("#login-header,.login-header").remove();
     $("#loading_image").hide();
     $(".custom-title").remove();
     $("br").remove();
-    $(".dropdown-toggle").remove();
+
     $("#group_multi_select").prop("title", "Choose Program");
     $("#group_multi_select").removeAttr("data-actions-box");
     $("#group_multi_select").removeAttr("data-live-search");
     $("#group_multi_select").removeAttr("data-live-search-placeholder");
     $("#group_multi_select").removeAttr("multiple");
-    $("#group_multi_select").addClass("form-control");
     $("#group_multi_select").css({
         "height": "4.3rem !important"
     });
@@ -331,6 +330,7 @@ $(function() {
     if (action == "/moas/newusersignup") {
         // $(".btn-group-sm").hide();
         // $(".glyphicon.glyphicon-ok").remove();
+        $(".bootstrap-select").parent();
         var body = `
         <div class="row-main">
             <div class="col1">
