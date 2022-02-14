@@ -19,7 +19,7 @@ $(function() {
     console.log(opt2)
 
     $("hr").remove();
-    $("#groupsDiv").hide();
+    $("#groupsDiv").remove();
     $("#login-header,.login-header").remove();
     $("#loading_image").hide();
     $(".custom-title").remove();
