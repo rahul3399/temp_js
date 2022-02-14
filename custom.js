@@ -10,21 +10,44 @@ $(function() {
     var forgotPassURL = window.location.origin + "/moas/idp/resetpassword";
     var googleBtnId = '86';
     $("link[rel='stylesheet'][href*='/moas/css/login-style-ui.css?ver=2.0']").remove();
-    // $("link[rel='stylesheet'][href*='bootstrap-select.min.css']").remove();
+    // $("link[rel='stylesheet'][href*='/moas/css/bootstrap-select.min.css']").remove();4
+    var opt1 = $($("#group_multi_select").children()[0]).text();
+    var opt2 = $($("#group_multi_select").children()[1]).text();
+    var optval1 = $($("#group_multi_select").children()[0]).val();
+    var optval2 = $($("#group_multi_select").children()[1]).val();
+    console.log(opt1)
+    console.log(opt2)
+
     $("hr").remove();
+    $("#groupsDiv").hide();
     $("#login-header,.login-header").remove();
     $("#loading_image").hide();
     $(".custom-title").remove();
     $("br").remove();
-
+    $(".group_multi_select").parent();
+    $(".open").remove();
+    $("#group_multi_select").removeAttr("multiple");
     $("#group_multi_select").prop("title", "Choose Program");
     $("#group_multi_select").removeAttr("data-actions-box");
+    // $("#group_multi_select").parent().removeClass()
+
+
     $("#group_multi_select").removeAttr("data-live-search");
     $("#group_multi_select").removeAttr("data-live-search-placeholder");
-    $("#group_multi_select").removeAttr("multiple");
-    $("#group_multi_select").css({
-        "height": "4.3rem !important"
-    });
+    $("span.glyphicon").hide();
+    // $("#group_multi_select").removeAttr("multiple");
+    $("#group_multi_select").addClass("form-control");
+
+    // $("#group_multi_select").css({
+    //     "height": "4.3rem !important"
+    // });
+    var groupSel = `
+        <p class="text-left" style="margin:15px 0 0 0;">Program</p>
+        <select class="form-control">
+            <option value=` + optval1 + `>` + opt1 + `</option>
+            <option value=` + optval2 + `>` + opt2 + `</option>
+        </select>
+    `;
 
     let fonts = ``;
     let links = `
@@ -162,7 +185,7 @@ $(function() {
     $('head').append(fonts);
     $('head').append(links);
     $('head').append(customCss);
-
+    $("#row4Div").append(groupSel);
     var nav = ``;
     var action = $(".form").attr("action");
     var actionf = $(".form-inline").attr("action");
@@ -331,6 +354,7 @@ $(function() {
         // $(".btn-group-sm").hide();
         // $(".glyphicon.glyphicon-ok").remove();
         $(".bootstrap-select").parent();
+        $("#group_multi_select").parents().find(".btn-default").remove()
         var body = `
         <div class="row-main">
             <div class="col1">
