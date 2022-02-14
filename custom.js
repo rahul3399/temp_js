@@ -1,369 +1,401 @@
 $(function() {
+
+    if (window.location.href.indexOf("enduserwelcome") > -1) {
+        return;
+    }
+
+    console.log("Script added");
+
     var signupURL = window.location.origin + "/moas/idp/usersignup";
-    var signinURL = window.location.origin + "/moas/idplogin";
     var forgotPassURL = window.location.origin + "/moas/idp/resetpassword";
-    $("link[rel='stylesheet'][href*='common']").remove();
-    $("link[rel='stylesheet'][href*='login-style']").remove();
+    var googleBtnId = '86';
+    $("link[rel='stylesheet'][href*='/moas/css/login-style-ui.css?ver=2.0']").remove();
+    $("link[rel='stylesheet'][href*='bootstrap-select.min.css']").remove();
     $("hr").remove();
     $("#login-header,.login-header").remove();
     $("#loading_image").hide();
     $(".custom-title").remove();
-    var stylesheet = `
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+    $("br").remove();
+    $(".dropdown-toggle").remove();
+    $("#group_multi_select").prop("title", "Choose Program");
+    $("#group_multi_select").removeAttr("data-actions-box");
+    $("#group_multi_select").removeAttr("data-live-search");
+    $("#group_multi_select").removeAttr("data-live-search-placeholder");
+    $("#group_multi_select").removeAttr("multiple");
+    $("#group_multi_select").addClass("form-control");
+    $("#group_multi_select").css({
+        "height": "4.3rem !important"
+    });
+
+    let fonts = ``;
+    let links = `
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    `;
+    let customCss = `
     <style>
-    @font-face {
-      font-family: 'Overpass';
-      font-style: normal;
-      font-weight: 400;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/Overpass_Regular.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: italic;
-      font-weight: 400;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpassitalic.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: normal;
-      font-weight: 100;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpassthin.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: italic;
-      font-weight: 100;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpassthinitalic.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: normal;
-      font-weight: 200;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpassextralight.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: italic;
-      font-weight: 200;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpassextralightitalic.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: normal;
-      font-weight: 300;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpasslight.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: italic;
-      font-weight: 300;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpasslightitalic.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: normal;
-      font-weight: 600;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpasssemibold.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: italic;
-      font-weight: 600;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpasssemibolditalic.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: normal;
-      font-weight: 700;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/Overpass_Bold.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: italic;
-      font-weight: 700;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpassbolditalic.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: normal;
-      font-weight: 800;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpassextrabold.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: italic;
-      font-weight: 800;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpassextrabolditalic.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: normal;
-      font-weight: 900;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpassheavy.woff') format('woff');
-  }
-  @font-face {
-      font-family: 'Overpass';
-      font-style: italic;
-      font-weight: 900;
-      src: local('Overpass'), url('https://fonts.cdnfonts.com/s/12274/overpassheavyitalic.woff') format('woff');
-  }
-  
-  
-      body{
-        font-family: Overpass !important;
-      }
-      .login-text{
-        color: #434e58!important;
-        font-size: 40px;
-        margin-bottom: 2.5rem;
-        text-transform: uppercase;
+    /*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.3.6,
+* Autoprefixer: v10.3.1
+* Browsers: last 4 version
+*/
+
+.row-main{
+        display:-webkit-box;
+        display:-ms-flexbox;
+        display:flex;
+    }
+    .col{
+        -webkit-box-flex:40%  ;
+            -ms-flex:40%  ;
+                flex:40%  ;
+        margin:auto;
+    }
+    .col1{
+        -webkit-box-flex:50%  ;
+            -ms-flex:50%  ;
+                flex:50%  ;
+    }
+    .img-main{
+        width: 100%;
+        height: 100%;
+        -o-object-fit: cover;
+           object-fit: cover;
+    }
+    .login{
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 0px;
+        -webkit-box-shadow: 0 0 37.5px 14px #e8e8e8;
+                box-shadow: 0 0 37.5px 14px #e8e8e8;;
+    }
+    .login-main{
+        padding: 25px;
+        width: 400px;
+        margin:auto;
+    }
+    .logo{
         text-align: center;
-        font-family: MatrixII;
-        font-weight: 500;
-        line-height: 1.2;
+
+        background-position: center;
+        background-size: cover;
+    }
+    .logo1{
+        text-align: center;
+     
+        background-position: center;
+        background-size: cover;
+    }
+    li{
+        list-style-type: none;
+    }
+    input[type=text]{
+        padding:15px !important;
+    }
+    ::-webkit-input-placeholder { 
+        font-size:13px;
       }
-      .btn-login{
-        background: #6a2ece;
-        text-transform: uppercase;
+      ::-moz-placeholder {
+        font-size:13px;
+      }
+      :-ms-input-placeholder {
+        font-size:13px;
+      }
+      :-moz-placeholder { 
+        font-size:13px;
+      }
+      .text-left{
+          font-size:14px;
+          color:#aaa;
+      }
+      .registration{
+        border-radius:4px;
+        background-color: #195B94;
         color: #fff;
-        border-radius:0px;
-        width: 185px !important;
-        padding: 8px 30px 8px 30px;
-        font-size: 1.8rem;
-        border: 1px solid transparent;
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        vertical-align: top;
+        text-decoration: none;
+        border: none;
+        -webkit-transition: all .2s;
+        -o-transition: all .2s;
+        transition: all .2s;
+        padding: 12px;
+        width: 130px;
+        margin-top:20px;
+        font-size: 14px;
       }
-      .text-muted{
-        color: #6c757d!important;
+      .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+        width: 100% !important;
       }
-      .reset{
-        margin-top:10px;
-        margin-bottom:10px;
+      .section1{
+        background-image: url(https://enterprisedna.co/learning-portal/wp-content/uploads/2021/11/aapl-blue.jpg);
+        height: 100vh;
+        width: 100%;
+        background-color: #00101f;
+        background-position-x: right;
+        background-size: cover;
       }
       .form-control{
-        height: 42px;
-        font-size: 1.8rem;
+          height:4.0rem !important;
       }
-      .links{
-        color: #0794d8;
+      .input-custom {
+        height:4.0rem !important;
+    }
+      .inline{
+          display:inline-block;
       }
-      .logo-image {
-        width: 240px;
-    }
-    .navbar {
-        position: relative;
-        min-height: 100px;
-        margin-bottom: 20px;
-        border: 1px solid transparent;
-        border-radius: 0px !important;
-        box-shadow: 0 6px 17px -8px rgb(0 0 0 / 75%)
-    }
-    .navbar-default {
-        background-color: #2a2266;
-        border-color: #2a2266;
-    }
-    .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 30vh;
-        background-color: #f5f5f5;
-    }
-    .text-center {
-        text-align: center;
-    }
-    .site-footer {
-        padding: 128px 0;
-    }
-    .list-inline, .list-unstyled {
-        padding-left: 0;
-        list-style: none;
-    }
-    .site-footer ul {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-    }
-    dl, ol, p, ul {
-        margin-bottom: 1rem;
-    }
-    .site-footer h2 {
-        letter-spacing: 3.6px;
-        margin-bottom: 40px;
-        text-transform: uppercase;
-    }
-    .footer-bootom-content, .site-footer h2 {
-        font-size: 18px;
-        color: #000;
-        font-family: "Rubik",sans-serif;
-        font-weight: 400;
-    }
-    .copyright, .site-footer ul li a {
-        color: #000;
-        font-family: "Rubik",sans-serif;
-    }
-    a.footer-link {
-        font-weight: 400;
-        line-height: 1.5;
-        color: #212529;
-        text-transform: capitalize;
-        font-size: 25px!important;
-    }
-    .list-inline-item:not(:last-child) {
-        margin-right: 0.5rem;
-    }
-    .site-footer ul li {
-        width: 100%;
-    }
-    .list-inline-item {
-        display: inline-block;
-    }
-    
-    .site-footer ul li a {
-        font-size: 18px!important;
-        line-height: 60px;
-    }
-    @media (min-width: 768px){
-        .navbar-nav{
-            float:none !important;
-            margin: 0 auto !important;
-            display: table !important;
-            table-layout: fixed !important;
-        }
-    }
-    
-      </style>
-    `;
-    $("head").append(stylesheet);
-    var head = `
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-            <a class="navbar-brand" href="#">
-            <img src="https://miniorange.s3.amazonaws.com/public/images/customer-app-logos/272583/africanancestry-nav.svg" class="logo-image" alt="African Ancestry">
-        </a>
-        </ul>
-    </div><!-- /.navbar-collapse -->
-    </nav>
-    `;
-    var footer = `<footer class="site-footer " role="contentinfo">
-    <div class="container">
-    <div class="row">      
-        <div class="col-md-4 col-sm-6">
-            <div class="footer-social-icons"> 
-            <h2>FIND US ON</h2> 
-                <ul class="list-inline">
-                    
-                        <li class="list-inline-item">
-                            <a target="_blank" href="https://www.facebook.com/africanancestry">
-                                <svg id="Group_1617" data-name="Group 1617" xmlns="http://www.w3.org/2000/svg" width="34.458" height="34.249" viewBox="0 0 34.458 34.249">
-                                    <path id="Path_470" data-name="Path 470" d="M1062.458,17.229a17.229,17.229,0,1,0-19.921,17.02V22.21h-4.375v-4.98h4.375v-3.8c0-4.318,2.572-6.7,6.507-6.7a26.491,26.491,0,0,1,3.857.337v4.24h-2.172A2.49,2.49,0,0,0,1047.921,14v3.232h4.778l-.764,4.98h-4.015v12.04A17.234,17.234,0,0,0,1062.458,17.229Z" transform="translate(-1028 0)" fill="#682ace"/>
-                                </svg> Facebook
-                            </a>
-                        </li>
-                    
-                    
-                        <li class="list-inline-item"><a target="_blank" href="https://www.instagram.com/africanancestry/">         
-                        <svg id="Group_1614" data-name="Group 1614" xmlns="http://www.w3.org/2000/svg" width="34.458" height="34.459" viewBox="0 0 34.458 34.459">
-                            <path id="Path_521" data-name="Path 521" d="M3.616,0A3.616,3.616,0,1,1,0,3.616,3.616,3.616,0,0,1,3.616,0Z" transform="translate(13.612 13.613)" fill="#682ace"/>
-                            <path id="Path_471" data-name="Path 471" d="M1839.343,154.5a5.736,5.736,0,0,0-.356-1.92,3.427,3.427,0,0,0-1.962-1.962,5.739,5.739,0,0,0-1.92-.356c-1.091-.05-1.418-.06-4.178-.06s-3.088.011-4.178.06a5.738,5.738,0,0,0-1.92.356,3.427,3.427,0,0,0-1.962,1.962,5.741,5.741,0,0,0-.356,1.92c-.05,1.091-.06,1.418-.06,4.178s.011,3.088.06,4.178a5.741,5.741,0,0,0,.356,1.92,3.426,3.426,0,0,0,1.962,1.962,5.738,5.738,0,0,0,1.92.356c1.091.05,1.417.06,4.178.06s3.088-.011,4.178-.06a5.74,5.74,0,0,0,1.92-.356,3.427,3.427,0,0,0,1.962-1.962,5.736,5.736,0,0,0,.356-1.92c.05-1.091.06-1.418.06-4.178S1839.393,155.589,1839.343,154.5Zm-8.417,9.488a5.31,5.31,0,1,1,5.31-5.31A5.31,5.31,0,0,1,1830.927,163.986Zm5.52-9.588a1.241,1.241,0,1,1,1.24-1.241A1.241,1.241,0,0,1,1836.447,154.4Z" transform="translate(-1813.699 -141.447)" fill="#682ace"/>
-                            <path id="Path_472" data-name="Path 472" d="M1684.229-5.25a17.229,17.229,0,1,0,17.229,17.229A17.229,17.229,0,0,0,1684.229-5.25Zm10.277,21.492a7.591,7.591,0,0,1-.48,2.51A5.284,5.284,0,0,1,1691,21.776a7.585,7.585,0,0,1-2.51.48c-1.1.051-1.455.063-4.263.063s-3.16-.012-4.263-.063a7.587,7.587,0,0,1-2.51-.48,5.286,5.286,0,0,1-3.024-3.024,7.6,7.6,0,0,1-.48-2.51c-.051-1.1-.062-1.455-.062-4.263s.012-3.16.063-4.263a7.6,7.6,0,0,1,.48-2.51,5.286,5.286,0,0,1,3.024-3.024,7.587,7.587,0,0,1,2.51-.48c1.1-.051,1.455-.062,4.263-.062s3.16.012,4.263.062a7.585,7.585,0,0,1,2.51.48,5.284,5.284,0,0,1,3.024,3.024,7.591,7.591,0,0,1,.48,2.51c.051,1.1.063,1.455.063,4.263S1694.557,15.14,1694.506,16.242Z" transform="translate(-1667 5.25)" fill="#682ace"/>
-                        </svg>
-                        Instagram</a>
-                        </li>
-                    
-                    
-                        <li class="list-inline-item"><a target="_blank" href="https://twitter.com/africanancestry">                        
-                        <svg id="Group_1615" data-name="Group 1615" xmlns="http://www.w3.org/2000/svg" width="34.42" height="34.421" viewBox="0 0 34.42 34.421">
-                            <path id="Path_473" data-name="Path 473" d="M2359.71-5.25a17.21,17.21,0,1,0,17.21,17.21A17.21,17.21,0,0,0,2359.71-5.25Zm9.164,12.508c.01.2.01.4.01.609a13.378,13.378,0,0,1-13.469,13.468,13.191,13.191,0,0,1-7.235-2.14,8.63,8.63,0,0,0,1.129.069,9.513,9.513,0,0,0,5.88-2.022,4.725,4.725,0,0,1-4.417-3.289,4.508,4.508,0,0,0,.893.088,4.719,4.719,0,0,0,1.247-.166,4.74,4.74,0,0,1-3.8-4.643V9.172a4.654,4.654,0,0,0,2.14.589,4.733,4.733,0,0,1-1.472-6.312,13.427,13.427,0,0,0,9.758,4.948,4.326,4.326,0,0,1-.127-1.08,4.736,4.736,0,0,1,8.187-3.24,9.581,9.581,0,0,0,3-1.148,4.727,4.727,0,0,1-2.081,2.621,9.6,9.6,0,0,0,2.719-.746A9.7,9.7,0,0,1,2368.874,7.258Z" transform="translate(-2342.5 5.25)" fill="#682ace"/>
-                        </svg>
-                        Twitter</a>
-                        </li>
-                    
-                    
-                        <li class="list-inline-item"><a target="_blank" href="https://www.youtube.com/africanancestrydna">                    
-                        <svg id="Group_1616" data-name="Group 1616" xmlns="http://www.w3.org/2000/svg" width="34.99" height="34.991" viewBox="0 0 34.99 34.991">
-                            <path id="Path_474" data-name="Path 474" d="M3052.495-6.88a17.5,17.5,0,1,0,17.5,17.5A17.5,17.5,0,0,0,3052.495-6.88ZM3063.488,11.5a37.86,37.86,0,0,1-.219,3.8,5.292,5.292,0,0,1-.874,2.328,3.047,3.047,0,0,1-2.2.994c-3.077.236-7.7.244-7.7.244s-5.716-.056-7.475-.236a3.594,3.594,0,0,1-2.424-1,5.274,5.274,0,0,1-.874-2.327,37.886,37.886,0,0,1-.219-3.8V9.723a37.9,37.9,0,0,1,.219-3.8A5.3,5.3,0,0,1,3042.6,3.6a3.033,3.033,0,0,1,2.2-.991c3.076-.238,7.691-.238,7.691-.238h.01s4.615,0,7.693.238a3.033,3.033,0,0,1,2.2.991,5.284,5.284,0,0,1,.874,2.329,37.86,37.86,0,0,1,.219,3.8ZM3049.75,14.74l6.873-4.124-6.873-4.123Z" transform="translate(-3035 6.88)" fill="#682ace"/>
-                        </svg>
-                        YouTube</a>
-                        </li>
-                    
-                    
-                </ul>
-            </div>       
-        </div>
-    
-      <div class="col-md-4 col-sm-6">
-    
-              
-                
-                  <h2>Our company</h2>
-                    <ul class="footer-list list-inline">
-                      
-                        <li class="list-item list-inline-item"><a class="footer-link" href="https://africanancestry.com/pages/careers">Careers</a></li>
-                      
-                        <li class="list-item list-inline-item"><a class="footer-link" href="/pages/faqs">F.A.Q.</a></li>
-                      
-                        <li class="list-item list-inline-item"><a class="footer-link" href="https://africanancestry.com/policies/privacy-policy">Privacy Policy</a></li>
-                      
-                        <li class="list-item list-inline-item"><a class="footer-link" href="/policies/terms-of-service">Terms of Service</a></li>
-                      
-                        <li class="list-item list-inline-item"><a class="footer-link" href="/policies/refund-policy">Refund policy</a></li>
-                      
-                    </ul>
-                  
-                
-                
-                 
-            <!--p class="call-copy"><span>Call</span> or <span>Click</span> to place an order </p>
-            <p><a class="phone-number"><i class="fas fa-phone"></i> +1 202-723-0900</a></p-->
-            </div>  
-       <div class="col-md-4 col-sm-6">
-              <a href="/" class="logo main-logo" rel="home"><img src="https://miniorange.s3.amazonaws.com/public/images/customer-app-logos/272583/africanancestry-footer-logo.svg" data-src="https://miniorange.s3.amazonaws.com/public/images/customer-app-logos/272583/africanancestry-footer-logo.svg" class="logo-image lazyloaded" alt="African Ancestry"></a>
-       
-          <p class="copyright">© 2021 African Ancestry, Inc. All rights reserved.</p> 
-          <ul class="footer-extralinks list-inline">
-           <li class="list-inline-item"><a href="/policies/terms-of-service">Terms of Use</a></li>
-           <li class="list-inline-item"><a href="/policies/privacy-policy">Privacy Policy</a></li>
-          </ul> 
-        </div>
-    
-      </div>
-    </div>
-      
-    <!-- Newsletter popup Large modal ::Start -->
-    <!-- footer.liquid/newsletter-popup.liquid -->
-    
-    
-    
-    
-    
-      
-    </footer>`;
-    $("body").prepend(head);
-    $("body").append(footer);
-    var login = `<h1 class="login-text">LOGIN</h1>`;
-    var resetpassword = `<br>
-    <a href="https://africanancestry.com/account/recover" class="reset links">Forgot your password?</a>`;
-    var uname_text = `<small class="text-muted">We'll never share your email with anyone else.</small>`;
-    $("#login-wrapper").prepend(login);
-    $("#userName").append(uname_text);
-    $("#userName").removeClass();
-    $("#userName").addClass("col-md-4 col-md-offset-4");
-    $("#passwordspan").removeClass();
-    $("#plaintextPassword").prop("placeholder", "Password");
-    $("#passwordspan").append(resetpassword);
-    $("#username").prop("placeholder", "Enter Email");
-    $("#passwordspan").addClass("col-md-4 col-md-offset-4");
-    $("#loginbutton").parent().removeClass();
-    $("#loginbutton").parent().addClass("col-md-1 col-md-offset-4");
-    $("#loginbutton").val("SIGN IN");
-    $("#loginbutton").removeAttr("style");
-    $("#loginbutton").removeClass();
-    $("#loginbutton").addClass("btn-login");
-    $("#loginbutton").parent().parent().append(`<br><div class="col-md-4 col-sm-offset-4"><a href="https://africanancestry.com/account/register" class="links">Create account</a><br><a class="links" href="#"><br>Return to Store</a></div><br>`);
+      .create_act{
+        float:right;
+        margin-top:30px;
+        margin-left:80px
+      }
+      .text-left{
+          font-size:14px;
+      }
+      .btn-primary{
+          height:44px;
+          font-size:14px;
+      }
+  
+    </style>`;
+    $('head').append(fonts);
+    $('head').append(links);
+    $('head').append(customCss);
 
-    $("body").hide();
-    console.log("Script added");
+    var nav = ``;
+    var action = $(".form").attr("action");
+    var actionf = $(".form-inline").attr("action");
+    console.log(action);
+    console.log(actionf);
+    if (action == "login" || action == '/moas/idp/userlogin') {
+        $('div').hide();
+        window.location.href = 'https://enterprisedna.co/learning-portal?option=saml_user_login';
+        // window.location.href = 'https://twolips.miniorange.in/moas/idp/usersignup';
+    }
+    if (action == "/moas/idplogin") {
+        var body = `
+        <div class="row-main">
+            <div class="col1">
+                <div style="" class="section1">
 
-    $("body").show();
+                </div>
+            </div>
+            <div class="col">
+                <div  class="logo1">
+                    <img width="45%"  style="text-align:center" src="https://enterprisedna.co/learning-portal/wp-content/uploads/2021/10/LOGO-DARK-455x93.png">
+                </div>
+                <div class="login-main">
+                    <div class="login">
+
+                    <div class="form-check" style="margin-top:20px">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <small id="emailHelp" class="form-text text-muted" style="color: #aaa;">Remember Me</small>
+                    <small style="float:right;margin-top:4px;font-size:1.3rem;"><a href="idp/resetpassword" class="form-text text-muted">Forgot Password?</a></small>
+                  </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+        var footer = ``;
+        $(nav).insertBefore("#loading_image");
+        $("body").prepend(body);
+
+        $(footer).insertAfter("#login-body");
+
+        var alert = $(".alert");
+
+        $("#submit_btn").click(function() {
+            $("#username").val($("#uname").val());
+            $("#plaintextPassword").val($("#pass").val());
+            $(".form").submit();
+        });
+        var login = $(".login-form");
+        $(".login").prepend(login);
+        $("#login-wrapper").hide();
+        var unamelbl = `<p id="emailHelp" class="form-text text-muted" style="color: #aaa">Email Address</p>`;
+        $("#userName").removeClass();
+        $("#userName").prepend(unamelbl);
+        $(".custom-small-text").remove();
+        $("#loginbutton").removeClass();
+        $("#loginbutton").removeAttr("style");
+        $("#loginbutton").addClass("btn btn-primary");
+        $("#loginbutton").css({
+            "background-color": "#195B94",
+            "padding": "10px 40px 15px 40px",
+            "font-size": "14px",
+            "margin-top": "20px"
+        });
+        $("#loginbutton").parent().removeClass();
+        var passlbl = `<p id="emailHelp" class="form-text text-muted" style="color: #aaa">Password</p>`;
+        var duname = `<b><p id="emailHelp" class="form-text" style="text-align:center;margin-bottom:10px">` + $("#username").val() + `</p></b>`;
+
+        $("#passwordspan").removeClass();
+        $("#passwordspan").prepend(passlbl);
+        $("#passwordspan").prepend(duname);
+        var inline = $(".form-check");
+        $("#loginbutton").parent().parent().prepend(inline);
+        $(".login-main").prepend(alert);
+    } else if (action == "resetuserpassword" || actionf == "updateuserpassword") {
+        console.log("hh");
+        var body = `
+        <div class="row-main">
+            <div class="col1">
+                <div style="" class="section1">
+
+                </div>
+            </div>
+            <div class="col">
+                <div  class="logo" style="">
+                    <img width="45%"  style="text-align:center" src="https://enterprisedna.co/learning-portal/wp-content/uploads/2021/10/LOGO-DARK-455x93.png">
+                </div>
+                <div class="login-main">
+                    <div class="login">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+        var footer = ``;
+        $(nav).insertBefore("#loading_image");
+        $("body").prepend(body);
+        $(footer).insertAfter("#login-body");
+        var alert = $(".alert");
+        $(".login-main").prepend(alert);
+        var resetpassword_page = $("#login-wrapper");
+        $(".login").append(resetpassword_page);
+        $("h3").remove();
+        $("#username").parent().removeClass();
+        var uname = ` <p id="emailHelp" class="form-text text-muted" style="color: #aaa">Email Address</p>`;
+        $("#username").parent().prepend(uname);
+        $(".btn").removeAttr("style");
+        $(".btn").parent().removeClass();
+        $(".btn").parent().css({
+            "width": "150px",
+            "margin-top": "20px",
+
+        });
+        $(".btn-primary").css({
+            "font-size": "14px",
+            "padding": "15px 40px 15px 40px;",
+            "background-color": "#195B94"
+        })
+        $("#go-back-link").css({
+            "font-size": "14px",
+            "width": "100% !important",
+
+        })
+        $("#go-back-link").parent().removeAttr("style");
+        $("#go-back-link").parent().css({
+
+            "font-size": "10px",
+            "width": "100% !important",
+            "text-align": "center",
+            "margin-top": "30px"
+        });
+        $(".login").css({
+            "padding": "40px 40px 10px 40px"
+        })
+        var br = `<br>`;
+
+        $(".col-xs-5").removeClass();
+        $(".center").css({
+            "padding-left": "20px",
+
+        });
+        $("#submit").parent().css({
+            "padding-left": "20px"
+        });
+        $("#go-back-link").attr('href', '../idplogin');
+
+        $(".row").removeClass("center");
+        $("#password").css({
+            "padding-right": "80px"
+        })
+        $(".form-control").css({
+            "padding-right": "80px"
+        })
+
+    }
+    if (window.location.href.indexOf("updateuserpassword") > -1 && actionf != 'updateuserpassword') {
+        window.location.href = 'https://enterprisedna.co/learning-portal?option=saml_user_login';
+    }
+    var successpage = $("form").attr("id");
+    console.log(successpage);
+    if (successpage == 'postcreatelogin') {
+        window.location.href = 'https://enterprisedna.co/learning-portal?option=saml_user_login';
+    }
+    if (action == "/moas/newusersignup") {
+        // $(".btn-group-sm").hide();
+        // $(".glyphicon.glyphicon-ok").remove();
+        var body = `
+        <div class="row-main">
+            <div class="col1">
+                <div style="" class="section1">
+
+                </div>
+            </div>
+            <div class="col">
+                <div  class="logo">
+                    <img width="45%"  style="text-align:center" src="https://enterprisedna.co/learning-portal/wp-content/uploads/2021/10/LOGO-DARK-455x93.png">
+                </div>
+                <div class="login-main">
+                    <div class="login">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+        var footer = ``;
+        $(nav).insertBefore("#loading_image");
+        $("body").prepend(body);
+        $(footer).insertAfter("#login-body");
+        var alert = $(".alert");
+        $(".login-main").prepend(alert);
+        var signup_page = $("#inline-registration");
+        $(".login").prepend(signup_page);
+        $("#username").parent().removeClass();
+        $("#email").parent().removeClass();
+        $("#email").parent().css({
+            "margin-top": "10px"
+        })
+        $("#loginbutton").parent().removeClass();
+        $("#loginbutton").val("Register")
+        $("#loginbutton").removeClass();
+        $("#loginbutton").removeAttr("style");
+        $("#loginbutton").addClass("registration");
+        var sign_in_body = `<small class="sign_in_body" >  </small>`;
+        $("#loginbutton").parent().addClass("form-check");
+        $("#loginbutton").parent().append(sign_in_body);
+        // $("#groupsDiv").hide();
+        $("#groupsDiv").removeClass();
+
+        $($("#groupsDiv").children()[0]).text("Program");
+        $("#customAttribute1").parent().removeClass();
+        $("#customAttribute2").parent().removeClass();
+        $("#customAttribute1").prop("placeholder", "Company Name");
+        $("#customAttribute2").prop("placeholder", "Center of Excellence and Membership");
+        $("#email").removeClass("input-custom");
+        $("#username").removeClass("input-custom");
+        $("#email").removeClass("input-custom");
+        $("#group_multi_select").attr("required", "true")
+        $("#row2Div").removeClass();
+        $("#firstnameDiv").removeClass();
+        $("#lastnameDiv").removeClass();
+        $("#firstnameDiv").addClass("col-md-6");
+        $("#lastnameDiv").addClass("col-md-6");
+        $("#endUser_fname").prop("placeholder", "Firstname");
+        $("#endUser_lname").prop("placeholder", "Lastname");
+        $("#passwordDiv").removeClass();
+        $("#confirmpasswordDiv").removeClass();
+        $("#groupsDiv").removeClass();
+        $("#customAttribute1").parent().removeClass();
+        $(".custom-small-text").children().children().attr('href', '');
+        $(".custom-small-text").children().hide();
+        $(".custom-small-text").append(`<p>Already have an account?<a href='https://enterprisedna.co/learning-portal/?option=saml_user_login'> Click here</a></p>`);
+    }
 });
