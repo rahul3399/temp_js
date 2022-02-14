@@ -253,9 +253,12 @@ $(function() {
             <h2>FIND US ON</h2> 
                 <ul class="list-inline">
                     
-                        <li class="list-inline-item"><a target="_blank" href="https://www.facebook.com/africanancestry">
-                        
-                        <img src="//cdn.shopify.com/s/files/1/2138/0103/t/44/assets/Group1617.svg?v=4334035702860137864" class=" lazyloaded" data-src="//cdn.shopify.com/s/files/1/2138/0103/t/44/assets/Group1617.svg?v=4334035702860137864"> Facebook</a>
+                        <li class="list-inline-item">
+                            <a target="_blank" href="https://www.facebook.com/africanancestry">
+                                <svg id="Group_1617" data-name="Group 1617" xmlns="http://www.w3.org/2000/svg" width="34.458" height="34.249" viewBox="0 0 34.458 34.249">
+                                    <path id="Path_470" data-name="Path 470" d="M1062.458,17.229a17.229,17.229,0,1,0-19.921,17.02V22.21h-4.375v-4.98h4.375v-3.8c0-4.318,2.572-6.7,6.507-6.7a26.491,26.491,0,0,1,3.857.337v4.24h-2.172A2.49,2.49,0,0,0,1047.921,14v3.232h4.778l-.764,4.98h-4.015v12.04A17.234,17.234,0,0,0,1062.458,17.229Z" transform="translate(-1028 0)" fill="#682ace"/>
+                                </svg> Facebook
+                            </a>
                         </li>
                     
                     
