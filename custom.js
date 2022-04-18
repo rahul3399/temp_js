@@ -1,5 +1,10 @@
 $(function() {
-
+    if (window.location.href.indexOf("enduserwelcome") > -1) {
+        return;
+    }
+    if (window.location.href.indexOf("viewenduser") > -1) {
+        return;
+    }
     var signupURL = window.location.origin + "/moas/idp/usersignup";
     var signinURL = "https://drakelabs.xecurify.com/moas/broker/login/jwt/255124?client_id=36ixwtrlwzj2vf6ta3rioleg9497iby&redirect_uri=https%3A%2F%2Fdrakelabs.xecurify.com%2Fmoas%2Fbroker%2Flogin%2Fjwt%2F255124%3Fclient_id%3D36ixwtrlwzj2vf6ta3rioleg9497iby%26redirect_uri%3Dhttps%3A%2F%2Fdrakelabsstaging.mybigcommerce.com%2Flogin%2Ftoken%2F";
     var forgotPassURL = window.location.origin + "/moas/idp/resetpassword";
@@ -496,7 +501,7 @@ max-width:100% !important;
   width:100%;
 }
 .form-action-group{
-    flex-wrap:
+    flex-wrap:wrap;
 }
 }
 
@@ -544,6 +549,9 @@ max-width:100% !important;
 }
 .i-forgot{
   margin-left:-70px;
+}
+.form-action-group{
+    flex-wrap:wrap;
 }
 }
 
@@ -707,6 +715,9 @@ max-width:100% !important;
             $("#newPassword").parent().parent().css({
                 "margin-top": "10px"
             })
+            $(".btn-cnfrm").addClass("btn-signin");
+            $(".btn-cnfrm").addClass("button");
+            $(".btn-cancel").addClass("button");
             $("label").addClass("form-label");
         }
         var welcome = `<p style="font-family: NeueMontreal-Regular;
